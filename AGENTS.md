@@ -56,9 +56,8 @@ Write integration tests using the below credentials.
 ## Test credentials
 You may use the following credentials to access an OpenAI-compatible summarization endpoint:
 ```sh
-BASE_URL='http://100.96.79.2:8080/v1'
+BASE_URL='http://100.96.79.2:8085/v1'
 API_KEY='no-key-required'
-PORT=8085
 MAX_CONTEXT_LENGTH=32768
 ```
 
