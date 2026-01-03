@@ -24,6 +24,7 @@ The server is configured via environment variables:
 
 - `BASE_URL`: The base URL of the OpenAI-compatible API (default: `http://localhost:8080/v1`)
 - `API_KEY`: The API key for the API (default: `no-key-required`)
+- `MODEL_NAME`: The name of the summarization model (default: `gemma-3-1b`)
 - `MAX_TOKENS`: The maximum number of tokens allowed before summarization is triggered (default: `4096`)
 - `MAX_CONTEXT_LENGTH`: The maximum context length for the summarization model (default: `32768`)
 

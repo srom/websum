@@ -50,7 +50,7 @@ async function callSummarizer(content: string, context?: string): Promise<string
     
     try {
         const response = await axios.post(`${config.baseUrl}/chat/completions`, {
-            model: "gpt-3.5-turbo",
+            model: config.modelName,
             messages: [
                 { role: "user", content: prompt }
             ],
