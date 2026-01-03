@@ -7,15 +7,17 @@ import { summarizeIfNeeded } from "./services/summarizer.js";
 
 const server = new McpServer({
   name: "websum",
-  version: "1.0.0"
+  version: "0.1.0"
 });
 
-server.tool(
+server.registerTool(
     "fetch_url",
-    "Fetch a webpage, convert to markdown, and summarize if necessary",
     {
-        url: z.string().url().describe("The URL to fetch"),
-        context: z.string().optional().describe("Optional context to guide the summarization")
+        description: "Fetch a webpage, convert to markdown, and summarize if necessary",
+        inputSchema: {
+            url: z.string().url().describe("The URL to fetch"),
+            context: z.string().optional().describe("Optional short context to guide the summarization")
+        }
     },
     async ({ url, context }) => {
         try {

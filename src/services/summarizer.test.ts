@@ -1,8 +1,10 @@
+import { jest, describe, it, expect, beforeEach } from '@jest/globals';
 import axios from 'axios';
 import { summarizeIfNeeded } from './summarizer.js';
 
 jest.mock('axios');
-const mockedAxios = axios as jest.Mocked<typeof axios>;
+const mockedAxios = jest.mocked(axios);
+
 
 // We need to mock the config module. 
 // Since jest mocks are hoisted, we need to define it carefully.

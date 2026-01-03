@@ -1,5 +1,8 @@
 
+import { jest, describe, it, expect } from '@jest/globals';
+
 // Set env vars before imports
+
 process.env.BASE_URL = 'http://100.96.79.2:8085/v1';
 process.env.API_KEY = 'no-key-required';
 process.env.MAX_CONTEXT_LENGTH = '32768';
