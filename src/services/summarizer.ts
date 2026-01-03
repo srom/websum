@@ -36,12 +36,14 @@ export async function summarizeIfNeeded(content: string, context?: string): Prom
 
 function buildPrompt(content: string, context?: string): string {
   let prompt = `You are an expert summarizing engine. Summarize the content below down to a MAXIMUM of ${config.maxTokens} tokens.\n\n`;
+
+  prompt += `IMPORTANT: outputs your summary ONLY. NOTHING ELSE!\n\n`;
   
   if (context) {
     prompt += `Use the following context to guide your summarization: ${context}\n\n`;
   }
 
-  prompt += `IMPORTANT: outputs your summary ONLY. In markdown format. NOTHING ELSE.\n\nCONTENT:\n${content}`;
+  prompt += `CONTENT:\n${content}`;
   return prompt;
 }
 
