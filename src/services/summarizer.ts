@@ -6,8 +6,6 @@ export async function summarizeIfNeeded(content: string, context?: string): Prom
   const tokens = encode(content);
   const tokenCount = tokens.length;
 
-  console.error(`Content token count: ${tokenCount}, Max tokens: ${config.maxTokens}`);
-
   if (tokenCount <= config.maxTokens) {
     return content;
   }
