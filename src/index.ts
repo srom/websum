@@ -1,0 +1,55 @@
+#!/usr/bin/env node
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { z } from "zod";
+import { fetchAndConvert } from "./services/fetcher.js";
+import { summarizeIfNeeded } from "./services/summarizer.js";
+
+const server = new McpServer({
+  name: "websum",
+  version: "1.0.0"
+});
+
+server.tool(
+    "fetch_url",
+    "Fetch a webpage, convert to markdown, and summarize if necessary",
+    {
+        url: z.string().url().describe("The URL to fetch"),
+        context: z.string().optional().describe("Optional context to guide the summarization")
+    },
+    async ({ url, context }) => {
+        try {
+            const markdown = await fetchAndConvert(url);
+            const summary = await summarizeIfNeeded(markdown, context);
+            return {
+                content: [
+                    {
+                        type: "text",
+                        text: summary
+                    }
+                ]
+            };
+        } catch (error: any) {
+             return {
+                content: [
+                    {
+                        type: "text",
+                        text: `Error: ${error.message}`
+                    }
+                ],
+                isError: true,
+            };
+        }
+    }
+);
+
+async function main() {
+    const transport = new StdioServerTransport();
+    await server.connect(transport);
+    console.error("Websum MCP server running on stdio");
+}
+
+main().catch((error) => {
+    console.error("Server error:", error);
+    process.exit(1);
+});
