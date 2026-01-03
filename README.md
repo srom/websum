@@ -28,7 +28,56 @@ The server is configured via environment variables:
 - `MAX_TOKENS`: The maximum number of tokens allowed before summarization is triggered (default: `4096`)
 - `MAX_CONTEXT_LENGTH`: The maximum context length for the summarization model (default: `32768`)
 
-## Installation & Usage
+## Installation & Configuration
+
+This package is available on npm: https://www.npmjs.com/package/websum-mcp
+
+### Claude code config
+
+```json
+{
+  "mcpServers": {
+    "websum": {
+      "command": "npx",
+      "args": ["-y", "websum-mcp"],
+      "env": {
+        "BASE_URL": "http://localhost:8080/v1",
+        "API_KEY": "no-key-required",
+        "MODEL_NAME": "gemma-3-1b",
+        "MAX_TOKENS": "4096",
+        "MAX_CONTEXT_LENGTH": "32768"
+      }
+    }
+  }
+}
+```
+
+### opencode config
+
+Add to the `mcp` section your `opencode.json` [config file](https://opencode.ai/docs/config/):
+
+```json
+{
+  "mcp": {
+    "websum": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "websum-mcp"
+      ],
+      "environment": {
+        "BASE_URL": "http://localhost:8080/v1",
+        "API_KEY": "no-key-required",
+        "MODEL_NAME": "gemma-3-1b",
+        "MAX_TOKENS": "4096",
+        "MAX_CONTEXT_LENGTH": "32768"
+      },
+      "enabled": true
+    }
+  }
+}
+```
 
 ### Docker
 
@@ -36,14 +85,6 @@ The server is configured via environment variables:
 docker build -t websum-mcp .
 docker run -i websum-mcp
 ```
-
-### NPX
-
-```sh
-npx websum-mcp
-```
-
-(Note: Ensure the package is available or installed locally/globally)
 
 ## Development
 
