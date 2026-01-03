@@ -9,6 +9,14 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/srom/websum.git"
+  },
+  "bugs": {
+    "url": "https://github.com/srom/websum/issues"
+  },
+  "homepage": "https://github.com/srom/websum",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.25.1",
     "@types/turndown": "^5.0.6",
@@ -37,7 +45,7 @@
     "websum",
     "summary"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "Romain Strock",
+  "license": "MIT",
   "type": "commonjs"
 }
