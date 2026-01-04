@@ -33,15 +33,30 @@ export async function summarizeIfNeeded(content: string, context?: string): Prom
 }
 
 function buildPrompt(content: string, context?: string): string {
-  let prompt = `You are an expert summarizing engine. Summarize the content below down to a MAXIMUM of ${config.maxTokens} tokens.\n\n`;
-
-  prompt += `IMPORTANT: outputs your summary ONLY. NOTHING ELSE!\n\n`;
+  let prompt = (
+    `You are an expert at summarization. ` + 
+    `Summarize the content below down to a MAXIMUM of ${config.maxTokens} tokens.\n\n`
+  );
   
   if (context) {
-    prompt += `Use the following context to guide your summarization: ${context}\n\n`;
+    prompt += (
+      `Use the following context to guide your summarization:\n` +
+      `<context>${context}</context>\n\n`
+    );
   }
 
-  prompt += `CONTENT:\n${content}`;
+  prompt += `<content>${content}</content>\n\n`;
+
+  prompt += (
+    `IMPORTANT:\n` + 
+    `- Keep most of the factual content for technical subjects.\n` +
+    `  - For instance, keep as much of the code as possible on package documentation.\n` +
+    `- DO NOT OUTPUT ANYTHING BUT THE SUMMARY!\n` +
+    `  - NO USER GREETING.\n` + 
+    `  - NO "Certainly!".\n` + 
+    `  - NO "Okay, here is the summary"\n` + 
+    `  - IN SHORT: NO COMMENTARY! JUMP STRAIGHT TO THE SUMMARY.`
+  );
   return prompt;
 }
 
