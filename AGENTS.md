@@ -51,15 +51,6 @@ You may also draw inspiration from other MCP tools, such as this MCP server for 
 
 ## Testing
 Write thorough unit tests and make sure they all pass!
-Write integration tests using the below credentials.
-
-## Test credentials
-You may use the following credentials to access an OpenAI-compatible summarization endpoint:
-```sh
-BASE_URL='http://100.96.79.2:8085/v1'
-API_KEY='no-key-required'
-MAX_CONTEXT_LENGTH=32768
-```
 
 ## Installation
 Should support:
@@ -98,7 +89,7 @@ Here is an example opencode.json config stub (using a fictitious package for now
 ## Environment
 
 You are running within a docker container running Debian slim. The working directory has been mounted to /app.
-Node is already installed, as well as a few core packages. YOu have root access. You may install any packages you see fit to help you carry out your task from start to finish.
+Node is already installed, as well as a few core packages. You have root access. You may install any packages you see fit to help you carry out your task from start to finish.
 
 ## Closing words
 - Use standard TypeScript style and best practices.
