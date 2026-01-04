@@ -58,7 +58,8 @@ async function callSummarizer(content: string, context?: string): Promise<string
             headers: {
                 'Authorization': `Bearer ${config.apiKey}`,
                 'Content-Type': 'application/json'
-            }
+            },
+            timeout: config.summarizerTimeout * 1000,
         });
 
         if (response.data && response.data.choices && response.data.choices.length > 0) {

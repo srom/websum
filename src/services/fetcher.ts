@@ -1,16 +1,16 @@
 import axios from 'axios';
 import TurndownService from 'turndown';
-
-const turndownService = new TurndownService({ headingStyle: 'atx' });
+import { config } from '../config.js';
 
 export async function fetchAndConvert(url: string): Promise<string> {
   try {
     const response = await axios.get(url, {
       headers: {
-        'User-Agent': 'websum-mcp/1.0',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+        'User-Agent': config.userAgent,
+        'Accept': 'text/markdown;q=1.0, text/x-markdown;q=0.9, text/plain;q=0.8, text/html;q=0.7, */*;q=0.1',
+        'Accept-Language': 'en-US,en;q=0.9',
       },
-      timeout: 10000 // 10 seconds timeout
+      timeout: config.requestTimeout * 1000
     });
 
     const contentType = response.headers['content-type'];
@@ -23,7 +23,7 @@ export async function fetchAndConvert(url: string): Promise<string> {
     }
 
     const html = response.data;
-    const markdown = turndownService.turndown(html);
+    const markdown = convertHTMLToMarkdown(html);
     return markdown;
   } catch (error: any) {
     if (axios.isAxiosError(error)) {
@@ -31,4 +31,16 @@ export async function fetchAndConvert(url: string): Promise<string> {
     }
     throw error;
   }
+}
+
+function convertHTMLToMarkdown(html: string): string {
+  const turndownService = new TurndownService({
+    headingStyle: "atx",
+    hr: "---",
+    bulletListMarker: "-",
+    codeBlockStyle: "fenced",
+    emDelimiter: "*",
+  })
+  turndownService.remove(["script", "style", "meta", "link"])
+  return turndownService.turndown(html)
 }
