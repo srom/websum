@@ -7,7 +7,7 @@ import { summarizeIfNeeded } from "./services/summarizer.js";
 
 const server = new McpServer({
   name: "websum",
-  version: "0.1.0"
+  version: "0.2.0"
 });
 
 server.registerTool(
