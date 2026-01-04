@@ -3,6 +3,10 @@ import TurndownService from 'turndown';
 import { config } from '../config.js';
 
 export async function fetchAndConvert(url: string): Promise<string> {
+  // Validate URL
+  if (!url.startsWith("http://") && !url.startsWith("https://")) {
+    throw new Error("URL must start with http:// or https://")
+  }
   try {
     const response = await axios.get(url, {
       headers: {
