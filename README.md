@@ -16,7 +16,7 @@ Fetches a webpage, turns its content into markdown and optionally summarizes it.
 
 **Parameters:**
 - `url` (string, required): The URL to fetch.
-- `context` (string, optional): A short description about what knowledge to gather, used to guide summarization.
+- `context` (string, optional): A short description used to guide summarization.
 
 ## Configuration
 
