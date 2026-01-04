@@ -25,6 +25,7 @@ The server is configured via environment variables:
 
 Mandatory parameter:
 - `BASE_URL`: The base URL of the OpenAI-compatible API.
+  - e.g., `https://api.openai.com/v1` or `http://localhost:8080/v1`
 
 Optional parameters:
 - `API_KEY`: The key for the API (default: `no-key-required`)
