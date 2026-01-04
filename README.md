@@ -6,7 +6,8 @@ An MCP server for fetching and summarising the content of web pages.
 
 - Fetches web pages via URL.
 - Converts HTML content to Markdown.
-- Summarizes content using an OpenAI-compatible API if it exceeds a configurable token limit.
+- Summarizes content using your LLM of choice if content size exceeds a configurable limit.
+  - Supports any OpenAI-compatible API.
 
 ## Tools
 
