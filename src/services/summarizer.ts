@@ -34,28 +34,33 @@ export async function summarizeIfNeeded(content: string, context?: string): Prom
 
 function buildPrompt(content: string, context?: string): string {
   let prompt = (
-    `You are an expert at summarization. ` + 
-    `Summarize the content below down to a MAXIMUM of ${config.maxTokens} tokens.\n\n`
+    `You are a Precision Snippet Extractor. ` +
+    `Your goal is to identify and retrieve the most relevant segments of text from the provided document. ` +
+    `Limit your output to about ${config.maxTokens} tokens.\n\n`
   );
-  
-  if (context) {
-    prompt += (
-      `Use the following context to guide your summarization:\n` +
-      `<context>${context}</context>\n\n`
+  prompt = (
+    `For instance, if content relates to a python package, ` + 
+    `key information include code examples and associated explanations.\n\n`
+  )
+  if (!context) {
+    context = (
+      `Extract the most information-dense passages that define the primary subject matter. ` + 
+      `Remove all fluff and redundant phrasing.`
     );
   }
-
-  prompt += `<content>${content}</content>\n\n`;
-
   prompt += (
-    `IMPORTANT:\n` + 
-    `- Keep most of the factual content for technical subjects.\n` +
-    `  - For instance, keep as much of the code as possible on package documentation.\n` +
-    `- DO NOT OUTPUT ANYTHING BUT THE SUMMARY!\n` +
-    `  - NO USER GREETING.\n` + 
-    `  - NO "Certainly!".\n` + 
-    `  - NO "Okay, here is the summary"\n` + 
-    `  - IN SHORT: NO COMMENTARY! JUMP STRAIGHT TO THE SUMMARY.`
+    `Use the following user-provided context to guide your selection: ` +
+    `<CONTEXT_START>${context}</CONTEXT_END>\n\n`
+  );
+  prompt += (
+    `<DOCUMENT_START>\n${content}\n<DOCUMENT_END>\n\n`
+  );
+  prompt += (
+    `IMPORTANT: You must maintain the absolute integrity of the source text; ` +
+    `do not paraphrase, edit, or add external information. ` + 
+    `Output only the original, verbatim snippets that directly address the core context. ` +
+    `NO COMMENTARY.\n\n` +
+    `OUTPUT:`
   );
   return prompt;
 }
