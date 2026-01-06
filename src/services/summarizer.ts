@@ -36,7 +36,7 @@ function buildPrompt(content: string, context?: string): string {
   let prompt = (
     `You are a Precision Snippet Extractor. ` +
     `Your goal is to identify and retrieve the most relevant segments of text from the provided document. ` +
-    `Limit your output to about ${config.maxTokens} tokens.\n\n`
+    `Limit your output to a maximum of about ${config.maxTokens} tokens.\n\n`
   );
   prompt = (
     `For instance, if content relates to a python package, ` + 
