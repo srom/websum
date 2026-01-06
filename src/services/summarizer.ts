@@ -19,7 +19,7 @@ export async function summarizeIfNeeded(content: string, context?: string): Prom
   // Calculate how many tokens we can fit for the content
   // Add some margin to account for tokenizer mismatch
   // Formula: (MaxContext * (1 - Margin)) - StaticOverhead
-  const safetyMarginPercent = 0.1
+  const safetyMarginPercent = 0.02
   const safeContextLimit = Math.floor(config.maxContextLength * (1 - safetyMarginPercent));
   const maxContentTokens = safeContextLimit - staticTokens;
 
