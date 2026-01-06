@@ -11,7 +11,7 @@ Main usecase: use as a web fetching tool for local LLMs with limited context siz
 - Summarize content using your LLM of choice when content size exceeds a configurable limit.
   - Supports any OpenAI-compatible API.
 
-Except from the prompt being sent ot the summarizing LLM:
+Excerpt from the prompt being sent ot the summarizing LLM:
 
 ```md
 You are a Precision Snippet Extractor.
