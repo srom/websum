@@ -15,17 +15,23 @@ export async function summarizeIfNeeded(content: string, context?: string): Prom
   // First, estimate the static part of the prompt
   const staticPrompt = buildPrompt('', context);
   const staticTokens = encode(staticPrompt).length;
+
   // Calculate how many tokens we can fit for the content
-  const maxContentTokens = config.maxContextLength - staticTokens - 100; // Buffer
+  // Add some margin to account for tokenizer mismatch
+  // Formula: (MaxContext * (1 - Margin)) - StaticOverhead
+  const safetyMarginPercent = 0.1
+  const safeContextLimit = Math.floor(config.maxContextLength * (1 - safetyMarginPercent));
+  const maxContentTokens = safeContextLimit - staticTokens;
 
   let contentToSummarize = content;
   
   if (tokenCount > maxContentTokens) {
-      console.error(`Content length (${tokenCount}) + prompt overhead exceeds max context length (${config.maxContextLength}). Truncating content.`);
+      console.error(`Content length (${tokenCount}) + prompt overhead (${staticTokens}) exceeds max context length (${maxContentTokens}). Truncating content.`);
       if (maxContentTokens > 0) {
         contentToSummarize = decode(tokens.slice(0, maxContentTokens));
       } else {
-        throw new Error("Context length too small to even fit the prompt instructions.");
+        // Edge case: instructions are larger than the context window allowed.
+        throw new Error(`Context length (${maxContentTokens}) too small to even fit the prompt instructions (${staticTokens}).`);
       }
   }
 
@@ -33,35 +39,51 @@ export async function summarizeIfNeeded(content: string, context?: string): Prom
 }
 
 function buildPrompt(content: string, context?: string): string {
+  // Define core task
   let prompt = (
-    `You are a Precision Snippet Extractor. ` +
-    `Your goal is to identify and retrieve the most relevant segments of text from the provided document. ` +
-    `Limit your output to a maximum of about ${config.maxTokens} tokens.\n\n`
+    `You are a High-Fidelity Snippet Extractor. ` +
+    `Your task is to read a web page dump in markdown format and output a clean list of relevant excerpts.\n` +
+    `You must act as a precise filter: discarding noise while preserving the original phrasing of signal.\n\n`
   );
-  prompt = (
-    `For instance, if content relates to a python package, ` + 
-    `key information include code examples and associated explanations.\n\n`
-  )
+
+  // Rules of engagement
+  prompt += (
+    `### RULES:\n` +
+    `1. **VERBATIM ONLY:** Do not rewrite, summarize, or fix grammar. Copy-paste exactly.\n` +
+    `2. **NO WEB NOISE:** Aggressively remove navigation menus, footer links, "sign up" forms, "related articles," and cookie warnings.\n` +
+    `3. **FORMAT:** Output a distinct bullet point for each extracted segment.\n` +
+    `4. **DENSITY:** Prefer extracting whole paragraphs over fragmented sentences.` +
+    `5. **LENGTH:** Keep it short.\n\n`
+  );
+
+  // Context
   if (!context) {
     context = (
-      `Extract the most information-dense passages that define the primary subject matter. ` + 
-      `Remove all fluff and redundant phrasing.`
+      `Identify the core subject matter. ` +
+      `Extract the introduction, main technical details, arguments, and conclusions. ` +
+      `Ignore generic filler.`
     );
   }
   prompt += (
-    `Use the following user-provided context to guide your selection: ` +
-    `<CONTEXT_START>${context}</CONTEXT_END>\n\n`
+    `### FOCUS CONTEXT:\n` +
+    `The user is specifically looking for information matching this description:\n` +
+    `"${context}"\n\n`
   );
+
+  // Document
   prompt += (
-    `<DOCUMENT_START>\n${content}\n<DOCUMENT_END>\n\n`
+    `### SOURCE DOCUMENT:\n` +
+    `<DOCUMENT_START>\n` + 
+    `${content}\n` + 
+    `<DOCUMENT_END>\n\n`
   );
+
+  // Final trigger
   prompt += (
-    `IMPORTANT: You must maintain the absolute integrity of the source text; ` +
-    `do not paraphrase, edit, or add external information. ` + 
-    `Output only the original, verbatim snippets that directly address the core context. ` +
-    `NO COMMENTARY.\n\n` +
-    `OUTPUT:`
+    `Based on the FOCUS CONTEXT, generate the list of verbatim excerpts from the SOURCE DOCUMENT now.\n` +
+    `Output:`
   );
+
   return prompt;
 }
 
@@ -74,6 +96,10 @@ async function callSummarizer(content: string, context?: string): Promise<string
             messages: [
                 { role: "user", content: prompt }
             ],
+            // Limit number of output tokens.
+            max_tokens: config.maxTokens,
+            // Set temperature to 0 to prevent hallucinations.
+            temperature: 0,
         }, {
             headers: {
                 'Authorization': `Bearer ${config.apiKey}`,
