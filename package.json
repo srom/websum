@@ -1,6 +1,6 @@
 {
   "name": "websum-mcp",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "An MCP server for fetching and summarizing web pages",
   "main": "dist/index.js",
   "bin": {
