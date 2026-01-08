@@ -12,6 +12,7 @@ export const config = {
   maxTokens: parseInt(process.env.MAX_TOKENS || '4096', 10),
   maxContextLength: parseInt(process.env.MAX_CONTEXT_LENGTH || '131072', 10),
   userAgent: process.env.USER_AGENT || defaultUserAgent,
-  requestTimeout: parseInt(process.env.REQUEST_TIMEOUT || '10', 10),   // in seconds
+  requestTimeout: parseInt(process.env.REQUEST_TIMEOUT || '10', 10),         // in seconds
   summarizerTimeout: parseInt(process.env.SUMMARIZER_TIMEOUT || '600', 10),  // in seconds
+  maxPayloadSize: parseFloat(process.env.MAX_PAYLOAD_SIZE || '10'),          // in MB
 };

@@ -60,6 +60,7 @@ Optional parameters:
 - `MAX_CONTEXT_LENGTH`: The maximum context length for the summarization model (default: `131072`)
 - `REQUEST_TIMEOUT`: URL fetching timeout in seconds (default: `10`)
 - `SUMMARIZER_TIMEOUT`: Summarizer API timeout in seconds (default: `600`)
+- `MAX_PAYLOAD_SIZE`: Maximum size of the the HTTP response content allowed in MB (default: `10`) 
 - `USER_AGENT` (defaults to a sensible value)
 
 ## Example outputs

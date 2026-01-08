@@ -3,18 +3,21 @@ import TurndownService from 'turndown';
 import { config } from '../config.js';
 
 export async function fetchAndConvert(url: string): Promise<string> {
-  // Validate URL
   if (!url.startsWith("http://") && !url.startsWith("https://")) {
     throw new Error("URL must start with http:// or https://")
   }
   try {
+    const timeout = config.requestTimeout * 1000;
+    const maxPayload = config.maxPayloadSize * 1024 * 1024;
     const response = await axios.get(url, {
       headers: {
         'User-Agent': config.userAgent,
         'Accept': 'text/markdown;q=1.0, text/x-markdown;q=0.9, text/plain;q=0.8, text/html;q=0.7, */*;q=0.1',
         'Accept-Language': 'en-US,en;q=0.9',
       },
-      timeout: config.requestTimeout * 1000
+      timeout: timeout,
+      maxContentLength: maxPayload,
+      maxBodyLength: maxPayload,
     });
 
     const contentType = response.headers['content-type'];
