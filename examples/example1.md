@@ -3,6 +3,7 @@ URL: https://docs.pytorch.org/docs/stable/distributions.html
 context: "pytorch lognormal distribution"
 ```
 URL content summarized by AI model 'gpt-oss-20b':
+
 We need excerpts about pytorch lognormal distribution. Find class LogNormal. Provide relevant excerpts: class definition, parameters, base_dist, entropy, expand, has_rsample, loc, mean, mode, scale, support, variance. Also maybe example. Provide verbatim.*class* torch.distributions.log_normal.LogNormal(*loc*, *scale*, *validate_args* = None*)[\[source\]](https://github.com/pytorch/pytorch/blob/v2.9.1/torch/distributions/log_normal.py#L14)[#](#torch.distributions.log_normal.LogNormal "Permalink to this definition")
 
 Bases: [`TransformedDistribution`](#torch.distributions.transformed_distribution.TransformedDistribution "torch.distributions.transformed_distribution.TransformedDistribution")

@@ -8,7 +8,7 @@ import { config } from './config.js';
 
 const server = new McpServer({
   name: "websum",
-  version: "0.4.0"
+  version: "0.4.1"
 });
 
 server.registerTool(
@@ -26,7 +26,7 @@ server.registerTool(
             const summary_obj = await summarizeIfNeeded(markdown, context);
             let output = summary_obj.content
             if (summary_obj.summarized) {
-                output = `URL content summarized by AI model '${config.modelName}':\n${output}`;
+                output = `URL content summarized by AI model '${config.modelName}':\n\n${output}`;
             }
             return {
                 content: [

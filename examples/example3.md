@@ -3,6 +3,7 @@ URL: https://lilianweng.github.io/posts/2023-06-23-agent/
 context: None.
 ```
 URL content summarized by AI model 'gpt-oss-20b':
+
 **Introduction**  
 > Building agents with LLM (large language model) as its core controller is a cool concept. Several proof‑of‑concept demos, such as AutoGPT, GPT‑Engineer and BabyAGI, serve as inspiring examples. The potentiality of LLM extends beyond generating well‑written copies, stories, essays and programs; it can be framed as a powerful general problem solver.  
 

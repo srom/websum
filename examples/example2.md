@@ -3,6 +3,7 @@ URL: https://github.com/ggerganov/llama.cpp
 context: "Extract supported model formats, hardware requirements, and basic usage example."
 ```
 URL content summarized by AI model 'gpt-oss-20b':
+
 **Supported model formats**  
 llama.cpp requires the model to be stored in the [GGUF](__https://github.com/ggml-org/ggml/blob/master/docs/gguf.md__) file format. Models in other data formats can be converted to GGUF using the convert_*.py Python scripts in this repo.  
 **Hardware requirements / supported backends**  
