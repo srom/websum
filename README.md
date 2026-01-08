@@ -41,7 +41,7 @@ Mandatory parameter:
 
 Optional parameters:
 - `API_KEY`: The key for the API (default: `no-key-required`)
-- `MODEL_NAME`: The name of the summarization model (default: `gemma-3-4b`)
+- `MODEL_NAME`: The name of the summarization model (default: `gpt-oss-20b`)
 - `MAX_TOKENS`: The maximum number of tokens allowed before summarization is triggered (default: `4096`)
 - `MAX_CONTEXT_LENGTH`: The maximum context length for the summarization model (default: `131072`)
 - `REQUEST_TIMEOUT`: URL fetching timeout in seconds (default: `10`)
@@ -63,7 +63,7 @@ This package is available on npm: https://www.npmjs.com/package/websum-mcp
       "env": {
         "BASE_URL": "http://localhost:8080/v1",
         "API_KEY": "no-key-required",
-        "MODEL_NAME": "gemma-3-4b",
+        "MODEL_NAME": "gpt-oss-20b",
         "MAX_TOKENS": "4096",
         "MAX_CONTEXT_LENGTH": "131072"
       }
@@ -89,7 +89,7 @@ Add to the `mcp` section your `opencode.json` [config file](https://opencode.ai/
       "environment": {
         "BASE_URL": "http://localhost:8080/v1",
         "API_KEY": "no-key-required",
-        "MODEL_NAME": "gemma-3-4b",
+        "MODEL_NAME": "gpt-oss-20b",
         "MAX_TOKENS": "4096",
         "MAX_CONTEXT_LENGTH": "131072"
       },
