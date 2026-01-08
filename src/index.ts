@@ -4,7 +4,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import { fetchAndConvert } from "./services/fetcher.js";
 import { summarizeIfNeeded } from "./services/summarizer.js";
-import { config } from '../config.js';
+import { config } from './config.js';
 
 const server = new McpServer({
   name: "websum",

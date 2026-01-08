@@ -25,7 +25,8 @@ describe('summarizer', () => {
   it('should return content as is if under maxTokens', async () => {
     const content = "Hi"; // 1 token
     const result = await summarizeIfNeeded(content);
-    expect(result).toBe(content);
+    expect(result.summarized).toBe(false);
+    expect(result.content).toBe(content);
     expect(mockedAxios.post).not.toHaveBeenCalled();
   });
 
@@ -39,7 +40,8 @@ describe('summarizer', () => {
     });
 
     const result = await summarizeIfNeeded(content);
-    expect(result).toBe("Summary");
+    expect(result.summarized).toBe(true);
+    expect(result.content).toBe("Summary");
     
     expect(mockedAxios.post).toHaveBeenCalledWith(
       'http://mock-api/chat/completions',
