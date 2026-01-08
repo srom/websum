@@ -8,16 +8,16 @@ import { config } from './config.js';
 
 const server = new McpServer({
   name: "websum",
-  version: "0.3.0"
+  version: "0.4.0"
 });
 
 server.registerTool(
     "fetch_url",
     {
-        description: "Fetch a webpage, convert to markdown, and summarize if necessary",
+        description: "Fetch a webpage, convert to markdown, and summarize if necessary.",
         inputSchema: {
-            url: z.string().url().describe("The URL to fetch"),
-            context: z.string().optional().describe("Optional short context to guide the summarization")
+            url: z.string().url().describe("The URL to fetch."),
+            context: z.string().optional().describe("The specific information you need from the page to ensure a relevant summary.")
         }
     },
     async ({ url, context }) => {
