@@ -8,7 +8,7 @@ import { config } from './config.js';
 
 const server = new McpServer({
   name: "websum",
-  version: "0.4.1"
+  version: "0.4.2"
 });
 
 server.registerTool(

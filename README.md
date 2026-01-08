@@ -11,15 +11,28 @@ Main usecase: use as a web fetching tool for local LLMs with limited context siz
 - Summarize content using your LLM of choice when content size exceeds a configurable limit.
   - Supports any OpenAI-compatible API.
 
-Excerpt from the prompt being sent ot the summarizing LLM:
+Prompt being sent ot the summarizing LLM (as defined in [src/services/summarizer.ts](src/services/summarizer.ts)):
 
 ```md
-You are a Precision Snippet Extractor.
-Your goal is to identify and retrieve the most relevant segments of text from the provided document.
-(...)
-```
+You are a High-Fidelity Snippet Extractor. Your task is to read a web page dump in markdown format and output a handful of relevant excerpts. You must act as a precise filter: discarding noise while preserving key signal from the original document.
+### RULES:
+- **VERBATIM ONLY**: Do not rewrite, summarize, or fix grammar. Copy-paste exactly. No greetings, commentary, meta-text or reasoning in output.
+- **NO WEB NOISE**: Aggressively remove navigation menus, footer links, "sign up" forms, "related articles", cookie warnings, etc.
+- **FACTUAL**: Keep as many technical details as possible (such as code snippets) if relevant to the subject at hand.
+- **DENSITY**: Prefer extracting whole paragraphs over fragmented sentences.
+- **LENGTH**: Short and to the point.
 
-Full prompt available [HERE](src/services/summarizer.ts). 
+### FOCUS CONTEXT: 
+The user is specifically looking for information matching this description: "(user-provided context)"
+
+### SOURCE DOCUMENT:
+<DOCUMENT_START>
+(requested url content in markdown format)
+<DOCUMENT_END>
+
+Based on the FOCUS CONTEXT, generate the list of verbatim excerpts from the SOURCE DOCUMENT now.
+Output:
+``` 
 
 ## Tools
 
