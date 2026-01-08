@@ -45,23 +45,6 @@ Fetch a webpage, convert to markdown, and summarize if necessary.
 - `url` (string, required): The URL to fetch.
 - `context` (string, optional): The specific information you need from the page to ensure a relevant summary.
 
-## Example outputs
-
-- Example 1:
-  - URL: https://docs.pytorch.org/docs/stable/distributions.html
-  - Context: "pytorch lognormal distribution"
-  - [View output from example 1](examples/example1.md)
-
-- Example 2:
-  - URL: https://github.com/ggerganov/llama.cpp
-  - Context: "Extract supported model formats, hardware requirements, and basic usage example."
-  - [View ouput from example 2](examples/example2.md)
-
-- Example 3:
-  - URL: https://lilianweng.github.io/posts/2023-06-23-agent/
-  - Context: None.
-  - [View output from example 3](examples/example3.md)
-
 ## Configuration
 
 The server is configured via environment variables:
@@ -78,6 +61,23 @@ Optional parameters:
 - `REQUEST_TIMEOUT`: URL fetching timeout in seconds (default: `10`)
 - `SUMMARIZER_TIMEOUT`: Summarizer API timeout in seconds (default: `600`)
 - `USER_AGENT` (defaults to a sensible value)
+
+## Example outputs
+
+- Example 1:
+  - URL: https://docs.pytorch.org/docs/stable/distributions.html
+  - Context: "pytorch lognormal distribution"
+  - [View output from example 1](examples/example1.md)
+
+- Example 2:
+  - URL: https://github.com/ggerganov/llama.cpp
+  - Context: "Extract supported model formats, hardware requirements, and basic usage example."
+  - [View ouput from example 2](examples/example2.md)
+
+- Example 3:
+  - URL: https://lilianweng.github.io/posts/2023-06-23-agent/
+  - Context: None.
+  - [View output from example 3](examples/example3.md)
 
 ## Installation & Configuration
 
