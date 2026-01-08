@@ -61,11 +61,11 @@ function buildPrompt(content: string, context?: string): string {
   // Rules of engagement
   prompt += (
     `### RULES:\n` +
-    `- **VERBATIM ONLY:** Do not rewrite, summarize, or fix grammar. Copy-paste exactly.\n` +
+    `- **VERBATIM ONLY:** Do not rewrite, summarize, or fix grammar. Copy-paste exactly. No greetings, commentary, meta-text or reasoning in output.\n` +
     `- **NO WEB NOISE:** Aggressively remove navigation menus, footer links, "sign up" forms, "related articles", cookie warnings, etc.\n` +
     `- **FACTUAL**: Keep as many technical details as possible (such as code snippets) if relevant to the subject at hand.` +
     `- **DENSITY:** Prefer extracting whole paragraphs over fragmented sentences.` +
-    `- **LENGTH:** Keep it short.\n\n`
+    `- **LENGTH:** Short and to the point.\n\n`
   );
 
   // Context
