@@ -64,7 +64,7 @@ Optional parameters:
 
 ## Example outputs
 
-Model `gpt-oss-20b` performs surprinsingly well ([Unsloth's version](https://huggingface.co/unsloth/gpt-oss-20b-GGUF) running on llama.cpp with `temperature = 0` and `reasoning: low`).
+Open-weight model `gpt-oss-20b` performs surprinsingly well. I am using [Unsloth's version](https://huggingface.co/unsloth/gpt-oss-20b-GGUF) running on llama.cpp with `temperature = 0` and `reasoning: low` (and otherwise [recommended paramaters](https://docs.unsloth.ai/basics/gpt-oss)).
 
 - Example 1:
   - URL: https://docs.pytorch.org/docs/stable/distributions.html
