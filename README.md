@@ -1,6 +1,6 @@
 # websum-mcp
 
-An MCP server for fetching the content of web pages as markdown and optionally summarize content by asking an LLM to extract relevant snippets to reduce the token footprint.
+An MCP server for fetching the content of web pages as markdown and optionally summarizing content by asking an LLM to extract relevant snippets to reduce the token footprint.
 
 Use case: use as a web fetching tool for local LLMs with limited context size. Can be used as a drop-in replacement for the webfetch tool in Claude code or opencode (or other coding TUIs).
 
