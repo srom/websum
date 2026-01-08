@@ -42,15 +42,15 @@ function buildPrompt(content: string, context?: string): string {
   // Define core task
   let prompt = (
     `You are a High-Fidelity Snippet Extractor. ` +
-    `Your task is to read a web page dump in markdown format and output a clean list of relevant excerpts.\n` +
-    `You must act as a precise filter: discarding noise while preserving the original phrasing of signal.\n\n`
+    `Your task is to read a web page dump in markdown format and output a handful of relevant excerpts.\n` +
+    `You must act as a precise filter: discarding noise while preserving key signal from the original document.\n\n`
   );
 
   // Rules of engagement
   prompt += (
     `### RULES:\n` +
     `- **VERBATIM ONLY:** Do not rewrite, summarize, or fix grammar. Copy-paste exactly.\n` +
-    `- **NO WEB NOISE:** Aggressively remove navigation menus, footer links, "sign up" forms, "related articles," and cookie warnings.\n` +
+    `- **NO WEB NOISE:** Aggressively remove navigation menus, footer links, "sign up" forms, "related articles", cookie warnings, etc.\n` +
     `- **FACTUAL**: Keep as many technical details as possible (such as code snippets) if relevant to the subject at hand.` +
     `- **DENSITY:** Prefer extracting whole paragraphs over fragmented sentences.` +
     `- **LENGTH:** Keep it short.\n\n`
