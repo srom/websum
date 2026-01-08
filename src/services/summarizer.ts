@@ -2,12 +2,20 @@ import { encode, decode } from 'gpt-3-encoder';
 import axios from 'axios';
 import { config } from '../config.js';
 
-export async function summarizeIfNeeded(content: string, context?: string): Promise<string> {
+export interface SummaryResult {
+  content: string;
+  summarized: boolean;
+}
+
+export async function summarizeIfNeeded(content: string, context?: string): Promise<SummaryResult> {
   const tokens = encode(content);
   const tokenCount = tokens.length;
 
   if (tokenCount <= config.maxTokens) {
-    return content;
+    return {
+      content: content,
+      summarized: false,
+    };
   }
 
   // Need to summarize
@@ -35,7 +43,11 @@ export async function summarizeIfNeeded(content: string, context?: string): Prom
       }
   }
 
-  return callSummarizer(contentToSummarize, context);
+  const summary = await callSummarizer(contentToSummarize, context);
+  return {
+    content: summary,
+    summarized: true,
+  };
 }
 
 function buildPrompt(content: string, context?: string): string {

@@ -4,6 +4,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import { fetchAndConvert } from "./services/fetcher.js";
 import { summarizeIfNeeded } from "./services/summarizer.js";
+import { config } from '../config.js';
 
 const server = new McpServer({
   name: "websum",
@@ -22,12 +23,16 @@ server.registerTool(
     async ({ url, context }) => {
         try {
             const markdown = await fetchAndConvert(url);
-            const summary = await summarizeIfNeeded(markdown, context);
+            const summary_obj = await summarizeIfNeeded(markdown, context);
+            let output = summary_obj.content
+            if (summary_obj.summarized) {
+                output = `URL content summarized by AI model '${config.modelName}':\n${output}`;
+            }
             return {
                 content: [
                     {
                         type: "text",
-                        text: summary
+                        text: output
                     }
                 ]
             };
