@@ -1,8 +1,10 @@
 # websum-mcp
 
+[![NPM](https://nodei.co/npm/websum-mcp.svg?style=shields&data=v&color=brightgreen)](https://nodei.co/npm/websum-mcp/)
+
 An MCP server for fetching the content of web pages as markdown and optionally summarizing it by asking an LLM to extract relevant snippets to reduce the token footprint.
 
-Use case: use as a web fetching tool for local LLMs with limited context size. Can be used as a drop-in replacement for the webfetch tool in Claude code or opencode (or other coding TUIs).
+Use case: avoid clogging context when fetching a webpage by first delegating the content to a summarizer agent. Can be used as a drop-in replacement for the webfetch tool in Claude code or opencode (or other coding TUIs).
 
 ## Features
 
